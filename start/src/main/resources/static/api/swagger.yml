@@ -28,9 +28,17 @@ paths:
                   type: string
                   example: "AccountServer"
                   description: 应用名称
+                appType:
+                  type: string
+                  example: "Deploy"
+                  description: 应用类型，Deploy：部署类型，Control:控制类型 Monitor：监控类型
+                version:
+                  type: string
+                  example: "1.0.1"
+                  description: 应用版本号
                 scriptTemplate:
                   type: string
-                  example: 1111
+                  example: "IyEvYmluL2Jhc2gKCiNleHBvcnQgSkFWQV9IT01FPS91c3IvbGliL2p2bS9qZGsxLjguMF8xOTEKI2V4cG9ydCBKUkVfSE9NRT0kSkFWQV9IT01FL2pyZQoKY2QgYGRpcm5hbWUgJDBgCgpBUFBfTkFNRT0lYXBwTmFtZSUKSkFSX05BTUU9JEFQUF9OQU1FXC5qYXIKCnVzYWdlKCkgewogICAgZWNobyAiVXNhZ2U6IHNoIFtzdGFydHxzdG9wfHJlc3RhcnR8c3RhdHVzXSIKICAgIGV4aXQgMQp9Cgppc19leGlzdCgpewogIHBpZD1gcHMgLWVmfGdyZXAgJEpBUl9OQU1FfGdyZXAgLXYgZ3JlcHxhd2sgJ3twcmludCAkMn0nIGAKICAjIDE6ZXhpc3QsIDA6bm90IGV4aXN0CiAgaWYgWyAteiAiJHtwaWR9IiBdOyB0aGVuCiAgICByZXR1cm4gMQogIGVsc2UKICAgIHJldHVybiAwCiAgZmkKfQoKCnN0YXJ0KCl7CiAgaXNfZXhpc3QKICBpZiBbICQ/IC1lcSAiMCIgXTsgdGhlbgogICAgZWNobyAiPj4+IFtTVUNDRVNTXSAke0pBUl9OQU1FfSBpcyBhbHJlYWR5IHJ1bm5pbmcgcGlkPSR7cGlkfSA8PDwiCiAgZWxzZQogICAgbm9odXAgamF2YSAtamFyICRKQVJfTkFNRSA+L2Rldi9udWxsIDI+JjEgJgogICAgaXNfZXhpc3QKICAgIGlmIFsgJD8gLWVxICIwIiBdOyB0aGVuCiAgICAgIGVjaG8gIj4+PiBbU1VDQ0VTU10gc3RhcnQgJEpBUl9OQU1FIHBpZD17JHtwaWR9fSA8PDwiCiAgICBlbHNlCiAgICAgIGVjaG8gIj4+PiBbRkFJTF0gc3RhcnQgJEpBUl9OQU1FIDw8PCIKICAgIGZpCiAgZmkKfQoKc3RvcCgpewogIGlzX2V4aXN0CiAgaWYgWyAkPyAtZXEgIjAiIF07IHRoZW4KICAgIGVjaG8gIj4+IGJlZ2luIGtpbGwgLTkgJHBpZCA8PCIKICAgIGtpbGwgLTkgJHBpZAogICAgaXNfZXhpc3QKICAgIGlmIFsgJD8gLWVxICIwIiBdOyB0aGVuCiAgICAgIGVjaG8gIj4+PiBbRkFJTF0gJEpBUl9OQU1FIHByb2Nlc3Mgc3RvcHBlZCA8PDwiCiAgICBlbHNlCiAgICAgIGVjaG8gIj4+PiBbU1VDQ0VTU10gc3RvcCAkSkFSX05BTUUgPDw8IgogICAgZmkKICBlbHNlCiAgICBlY2hvICI+Pj4gW1NVQ0NFU1NdICR7SkFSX05BTUV9IGlzIG5vdCBydW5uaW5nIDw8PCIKICBmaQp9CgpzdGF0dXMoKXsKICBpc19leGlzdAogIGlmIFsgJD8gLWVxICIwIiBdOyB0aGVuCiAgICBlY2hvICI+Pj4gW1NVQ0NFU1NdICR7SkFSX05BTUV9IGlzIHJ1bm5pbmcgcGlkPXske3BpZH19IDw8PCIKICBlbHNlCiAgICBlY2hvICI+Pj4gW1NVQ0NFU1NdICR7SkFSX05BTUV9IGlzIG5vdCBydW5uaW5nIDw8PCIKICBmaQp9CgpyZXN0YXJ0KCl7CiAgc3RvcAogIHN0YXJ0Cn0KCmNhc2UgIiQxIiBpbgogICJzdGFydCIpCiAgICBzdGFydAogICAgOzsKICAic3RvcCIpCiAgICBzdG9wCiAgICA7OwogICJzdGF0dXMiKQogICAgc3RhdHVzCiAgICA7OwogICJyZXN0YXJ0IikKICAgIHJlc3RhcnQKICAgIDs7CiAgKikKICAgIHVzYWdlCiAgICA7Owplc2FjCmV4aXQgMAo="
                   description: 脚本模板
                 placeHolderMap:
                   type: object
@@ -40,7 +48,7 @@ paths:
                     appName: "AccountServer"
                 fileUrl:
                   type: string
-                  example: "1"
+                  example: "http://192.168.10.251:8090/api/file/v1/f/app/f7badaf293a34f6aa6f41e3e752f1a22.zip"
                   description: 文件地址
                 autoStart:
                   type: boolean

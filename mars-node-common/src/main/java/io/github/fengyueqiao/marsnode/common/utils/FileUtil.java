@@ -12,7 +12,7 @@ public class FileUtil {
      * @return
      */
     public static String getExtention(String fileName){
-        if(fileName!=null && fileName.length()>0 && fileName.lastIndexOf(".")>-1){
+        if (fileName!=null && fileName.length()>0 && fileName.lastIndexOf(".")>-1){
             return fileName.substring(fileName.lastIndexOf("."));
         }
         return "";

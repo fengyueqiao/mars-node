@@ -21,6 +21,10 @@ public class AppInstanceStatus {
      */
     String presentState;
     /**
+     * 设置状态
+     */
+    String settingState;
+    /**
      * 版本号
      */
     String version;

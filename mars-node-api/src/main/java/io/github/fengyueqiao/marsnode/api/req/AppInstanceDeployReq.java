@@ -15,6 +15,14 @@ public class AppInstanceDeployReq {
      */
     String appName;
     /**
+     * app类型，参考AppTypeEnum
+     */
+    String appType;
+    /**
+     * 版本号
+     */
+    String version;
+    /**
      * 控制脚本模板
      */
     String scriptTemplate;

@@ -21,7 +21,7 @@ public class LocalFileTunnel {
     public boolean createDirIfAbsent(String dirPath) {
         try {
             Path path = Paths.get(dirPath);
-            if(!Files.exists(path)) {
+            if (!Files.exists(path)) {
                 Files.createDirectories(path);
                 log.info("createDirectories dirPath:" + dirPath);
             }
@@ -39,7 +39,7 @@ public class LocalFileTunnel {
             Path path = Paths.get(filePath);
 
             // 若文件存在将文件删除，并创建新的文件
-            if(Files.exists(path)) {
+            if (Files.exists(path)) {
                 Files.delete(path);
             }
             Files.createFile(path);
@@ -62,7 +62,7 @@ public class LocalFileTunnel {
             Path path = Paths.get(filePath);
 
             // 若文件存在将文件删除，并创建新的文件
-            if(Files.exists(path)) {
+            if (Files.exists(path)) {
                 Files.delete(path);
             }
             Files.createFile(path);
@@ -82,7 +82,7 @@ public class LocalFileTunnel {
             return false;
         } finally {
             try {
-                if(outputStream != null) {
+                if (outputStream != null) {
                     outputStream.close();
                 }
             } catch (IOException ex) {
@@ -99,7 +99,7 @@ public class LocalFileTunnel {
             Path path = Paths.get(filePath);
 
             // 若文件存在将文件删除，并创建新的文件
-            if(Files.exists(path)) {
+            if (Files.exists(path)) {
                 Files.delete(path);
             }
 
@@ -118,7 +118,7 @@ public class LocalFileTunnel {
     public String getFileSuffix(String fileName) {
         String fileSuffix = "";
         int dotIdx = fileName.lastIndexOf(".");
-        if( dotIdx >= 0) {
+        if ( dotIdx >= 0) {
             fileSuffix = fileName.substring(dotIdx);
         }
         return fileSuffix;

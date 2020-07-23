@@ -54,7 +54,7 @@ public class FileZipUtil {
         for (File fileTemp:
                 files) {
             parentFileNameTemp =  StringUtils.isEmpty(parentFileName)?fileTemp.getName():parentFileName+"/"+fileTemp.getName();
-            if(fileTemp.isDirectory()){
+            if (fileTemp.isDirectory()){
                 directory(zipOutputStream,fileTemp, parentFileNameTemp);
             }else{
                 zipFile(zipOutputStream,fileTemp,parentFileNameTemp);

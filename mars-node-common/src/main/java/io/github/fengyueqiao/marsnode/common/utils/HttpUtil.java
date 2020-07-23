@@ -83,7 +83,7 @@ public class HttpUtil {
      */
     public static String sendPostRequestReturnStr(String url,String jsonParam) throws Exception{
         HttpResponse httpResponse = HttpUtil.sendPostRequest(url,jsonParam);
-        if(httpResponse.getStatusLine().getStatusCode()!= REQUEST_SUCCESS){
+        if (httpResponse.getStatusLine().getStatusCode()!= REQUEST_SUCCESS){
             log.error("url:" + url);
             log.error("json:" + jsonParam);
             log.error("Code:" + httpResponse.getStatusLine().getStatusCode());
@@ -101,7 +101,7 @@ public class HttpUtil {
      */
     public static String sendPostRequestReturnStr(String url,String jsonParam,String token) throws Exception{
         HttpResponse httpResponse = HttpUtil.sendPostRequest(url,jsonParam,token);
-        if(httpResponse.getStatusLine().getStatusCode()!= REQUEST_SUCCESS){
+        if (httpResponse.getStatusLine().getStatusCode()!= REQUEST_SUCCESS){
             log.error("url:" + url);
             log.error("json:" + jsonParam);
             log.error("Code:" + httpResponse.getStatusLine().getStatusCode());
@@ -119,7 +119,7 @@ public class HttpUtil {
      */
     public static String sendGetRequestReturnStr(String url,String token) throws Exception{
         HttpResponse httpResponse = HttpUtil.sendGetRequest(url,token);
-            if(httpResponse.getStatusLine().getStatusCode()!= REQUEST_SUCCESS){
+            if (httpResponse.getStatusLine().getStatusCode()!= REQUEST_SUCCESS){
             log.error("url:" + url);
             log.error("Code:" + httpResponse.getStatusLine().getStatusCode());
             log.error(EntityUtils.toString(httpResponse.getEntity() ,"UTF-8"));
@@ -153,10 +153,10 @@ public class HttpUtil {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if(fos!=null){
+            if (fos!=null){
                 fos.close();
             }
-            if(inputStream!=null){
+            if (inputStream!=null){
                 inputStream.close();
             }
         }

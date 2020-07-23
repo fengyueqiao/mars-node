@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -33,31 +34,49 @@ public class AppInstanceManager {
     /**
      * Key: appName
      */
-    Map<String, AppInstanceStatus> appInstanceStatusMap;
+    Map<String, AppInstanceStatus> appInstanceStatusMap = new HashMap<>();
 
     /**
      * 若为空则从Center获取所有appInstance信息
      */
     public Map<String, AppInstanceStatus> getAppInstanceStatusMap() {
-        if(appInstanceStatusMap != null) {
-            return appInstanceStatusMap;
+        if (appInstanceStatusMap.isEmpty()) {
+            updateAppInstanceStatusMap();
+        }
+        return appInstanceStatusMap;
+    }
+
+    /**
+     * 从Center拉取最新的app实例更新
+     */
+    public void updateAppInstanceStatusMap() {
+        List<AppInstance> appInstanceList = marsCenterTunnel.listAppInstance(marsConfig.getNodeName());
+        if (appInstanceList == null) {
+            return;
         }
 
-        List<AppInstance> appInstanceList = marsCenterTunnel.listAppInstance(marsConfig.getNodeName());
-        if(appInstanceList == null) {
-            return new ConcurrentHashMap<>();
-        }
-        appInstanceStatusMap = new ConcurrentHashMap<>();
+        Map<String, AppInstanceStatus> tempAppInstanceStatusMap = new ConcurrentHashMap<>();
         for (AppInstance appInstance : appInstanceList) {
             AppInstanceStatus appInstanceStatus = new AppInstanceStatus();
             appInstanceStatus.setAppName(appInstance.getAppName());
             appInstanceStatus.setVersion(appInstance.getVersion());
             appInstanceStatus.setPid(0);
             appInstanceStatus.setPresentState(AppStateEnum.None.name());
-            appInstanceStatusMap.put(appInstance.getAppName(), appInstanceStatus);
-        }
 
-        return appInstanceStatusMap;
+            AppInstanceStatus oldAppInstanceStatus = appInstanceStatusMap.get(appInstance.getAppName());
+            if (oldAppInstanceStatus == null) {
+                appInstanceStatusMap.put(appInstance.getAppName(), appInstanceStatus);
+            } else {
+                if (!oldAppInstanceStatus.getSettingState().equals(appInstanceStatus.getSettingState())) {
+                    log.info("app:{} setting state change {}=>{}", appInstance.getAppName(),
+                            oldAppInstanceStatus.getSettingState(), appInstance.getSettingState());
+                }
+                if (!oldAppInstanceStatus.getVersion().equals(appInstanceStatus.getVersion())) {
+                    log.warn("app:{} version is diff {}=>{}", appInstance.getAppName(),
+                            oldAppInstanceStatus.getVersion(), appInstance.getVersion());
+                }
+            }
+        }
     }
 
     /**
@@ -77,7 +96,7 @@ public class AppInstanceManager {
 
             // 通过控制脚本检查app状态
             ControlCommandRet ret = appControlCommand.status(appName);
-            if(ret.isSuccess()){
+            if (ret.isSuccess()){
                 appInstanceStatus.setPid(ret.getPid());
                 if (ret.getPid() == 0){
                     appInstanceStatus.setPresentState(AppStateEnum.Inactive.name());

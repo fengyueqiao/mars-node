@@ -1,0 +1,167 @@
+openapi: 3.0.0
+info:
+  description: ''
+  version: 1.0.0
+  title: 节点服务
+tags:
+  - name: app
+    description: 应用
+#servers:
+#   - url: 'http://127.0.0.1:8080'
+paths:
+
+  /api/app/v1/deployAppInstance:
+    post:
+      tags:
+        - app
+      summary: 部署App
+
+      requestBody:
+        description: 请求参数
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                appName:
+                  type: string
+                  example: "AccountServer"
+                  description: 应用名称
+                scriptTemplate:
+                  type: string
+                  example: 1111
+                  description: 脚本模板
+                placeHolderMap:
+                  type: object
+                  additionalProperties:
+                    type: string
+                  example:
+                    appName: "AccountServer"
+                fileUrl:
+                  type: string
+                  example: "1"
+                  description: 文件地址
+                autoStart:
+                  type: boolean
+                  example: true
+                  description: 是否自动启动
+      responses:
+        '200':
+          description: 成功操作
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Meta'
+
+  /api/app/v1/stopAppInstance:
+    post:
+      tags:
+        - app
+      summary: 停止App
+
+      requestBody:
+        description: 请求参数
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                appName:
+                  type: string
+                  example: "AccountServer"
+                  description: app名称
+      responses:
+        '200':
+          description: 成功操作
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Meta'
+
+  /api/app/v1/destroyAppInstance:
+    post:
+      tags:
+        - app
+      summary: 销毁App
+
+      requestBody:
+        description: 请求参数
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                appName:
+                  type: string
+                  example: "AccountServer"
+                  description: app名称
+      responses:
+        '200':
+          description: 成功操作
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Meta'
+
+  /api/app/v1/startAppInstance:
+    post:
+      tags:
+        - app
+      summary: 启动App
+
+      requestBody:
+        description: 请求参数
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                appName:
+                  type: string
+                  example: "AccountServer"
+                  description: app名称
+      responses:
+        '200':
+          description: 成功操作
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Meta'
+
+components:
+  schemas:
+    Meta:
+      type: object
+      properties:
+        isSuccess:
+          type: boolean
+          description: true：成功 false：失败
+        errCode:
+          type: string
+          description: 错误码
+        errMessage:
+          type: string
+          description: 错误描述
+    PageListQry:
+      type: object
+      properties:
+        pageNum:
+          type: integer
+          example: 1
+          description: 分页编号，从1开始
+        pageSize:
+          type: integer
+          example: 10
+          description: 分页大小

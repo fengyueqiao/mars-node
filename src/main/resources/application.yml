@@ -1,4 +1,0 @@
-mars:
-  nodePath: /opt/app/
-server:
-  port: 9001
